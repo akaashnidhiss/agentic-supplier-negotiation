@@ -6,6 +6,13 @@
 2. **Suppliers communicate heterogeneously** (emails, PDFs, spec sheets, vague ranges), making it hard to normalize inputs and fairly evaluate vendors.
 
 ---
+## PoC Demo
+
+https://github.com/user-attachments/assets/f3a87f62-2ba4-475b-be1b-57c62fdfe54d
+
+https://github.com/user-attachments/assets/741b537f-0e9a-4249-9ec4-0334fe2794bf
+
+Link to higher quality demo video - https://drive.google.com/file/d/1TwtsuE5Ak8QIM_D3iCmvwykfoMjBrOOC/view?usp=sharing
 
 ## What this PoC Does
 
