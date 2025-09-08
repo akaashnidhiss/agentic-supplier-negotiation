@@ -1,0 +1,57 @@
+{
+  "form": {
+    "weights": {
+      "price": 0.5,
+      "OTIF": 0.2,
+      "payment_timeline": 0.2,
+      "specification": 0.1
+    },
+    "directions": {
+      "price": "lower",
+      "OTIF": "higher",
+      "payment_timeline": "higher",
+      "specification": "higher"
+    },
+    "min_values": {},
+    "max_values": {}
+  },
+  "scores": [
+    {
+      "sku_id": "SKU-001",
+      "supplier_id": "Acme Bearings",
+      "supplier_name": "Acme Bearings",
+      "total_score": 0.3316,
+      "component_scores": {
+        "price": 0.2966,
+        "OTIF": 0.6667,
+        "payment_timeline": 0.0,
+        "specification": 0.5
+      }
+    },
+    {
+      "sku_id": "SKU-002",
+      "supplier_id": "Precision Gasket Co",
+      "supplier_name": "Precision Gasket Co",
+      "total_score": 0.9,
+      "component_scores": {
+        "price": 1.0,
+        "OTIF": 1.0,
+        "payment_timeline": 0.5,
+        "specification": 1.0
+      }
+    },
+    {
+      "sku_id": "SKU-003",
+      "supplier_id": "TechGear Supplies",
+      "supplier_name": "TechGear Supplies",
+      "total_score": 0.2,
+      "component_scores": {
+        "price": 0.0,
+        "OTIF": 0.0,
+        "payment_timeline": 1.0,
+        "specification": 0.0
+      }
+    }
+  ],
+  "session_id": "b8286b15-8d5f-4194-82d7-a384ef116e27"
+}

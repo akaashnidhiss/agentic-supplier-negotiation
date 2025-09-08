@@ -1,0 +1,22 @@
+[
+  {
+    "to_email": "quotes@acmebearings.example",
+    "to_name": "Acme Bearings",
+    "subject": "RFQ: Request for Quote on Ball Bearings items",
+    "body": "Hello Acme Bearings,\nKindly share a quote for the listed SKUs. For each SKU (SKU-001), include numeric values for: specification (0–1), OTIF (%), payment_timeline (days), and price. Reply in JSON per SKU.\nThanks,\nProcurement",
+    "meta": {
+      "category": "Ball Bearings",
+      "supplier_id": "Acme Bearings"
+    }
+  },
+  {
+    "to_email": "sales@precisiongasket.example",
+    "to_name": "Precision Gasket Co",
+    "subject": "RFQ: Request for Quote on Gaskets",
+    "body": "Hello Precision Gasket Co,\nKindly share a quote for the listed SKUs. For each SKU, include numeric values for: specification (0–1), OTIF (%), payment_timeline (days), and price. Reply in JSON per SKU.\nThanks,\nProcurement",
+    "meta": {
+      "category": "Gaskets",
+      "supplier_id": "Precision Gasket Co"
+    }
+  }
+]

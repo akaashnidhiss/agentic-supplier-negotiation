@@ -1,77 +1,76 @@
-from pydantic import BaseModel
-from typing import List, Optional
+# models.py
+from dataclasses import dataclass, field, asdict
+from typing import List, Dict, Optional, Any
 
-class Supplier(BaseModel):
-    id: Optional[str] = None
+@dataclass
+class SpecItem:
+    sku_id: str
+    title: str
+    raw_text: str = ""
+    images: List[str] = field(default_factory=list)  # file paths to images (optional)
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+@dataclass
+class QuoteComponent:
+    ideal_value: Optional[float] = None
+    floor_value: Optional[float] = None
+    supplier_bids: List[Dict[str, Any]] = field(default_factory=list)  # [{supplier: str, value: float, source: str, raw: str}]
+
+@dataclass
+class QuoteSchema:
+    sku_id: str
+    category: Optional[str] = None
+    confidence: Optional[float] = None
+    rationale: Optional[str] = None
+    components: Dict[str, QuoteComponent] = field(default_factory=dict)  # e.g., {"specification": QuoteComponent(), ...}
+
+@dataclass
+class Supplier:
+    id: str
     name: str
-    contact_email: str
-    status: str
-    last_contact: Optional[str] = None
-    evaluation_average: Optional[float] = None
+    category: str
+    email: str
 
-class Document(BaseModel):
-    id: str
-    supplier_id: Optional[str]
-    doc_type: str
-    version: str
-    date: str
-    summary: str
-    embedding: Optional[List[float]]
-    file_url: str
-
-class Conversation(BaseModel):
-    id: str
+@dataclass
+class Bid:
+    sku_id: str
     supplier_id: str
-    state: str
-    conversation_turns: List[dict]
-    last_updated: str
+    supplier_name: str
+    components: Dict[str, float]  # normalized numeric values for scoring
+    raw_reply: str = ""
 
-class Evaluation(BaseModel):
-    id: str
-    conv_id: str
-    turn_id: str
-    judge_prompt_version: str
-    scores_json: dict
-    comments: Optional[str]
-    created_at: str
+@dataclass
+class ScoringFormula:
+    # weights must sum to 1.0; direction: "higher" or "lower"
+    weights: Dict[str, float] = field(default_factory=dict)
+    directions: Dict[str, str] = field(default_factory=dict)
+    # optional normalizers: min/max or target values per component
+    min_values: Dict[str, float] = field(default_factory=dict)
+    max_values: Dict[str, float] = field(default_factory=dict)
 
-# Sprint 2 Entities
-class AgentRun(BaseModel):
-    id: str
+@dataclass
+class Score:
+    sku_id: str
     supplier_id: str
-    conv_id: str
-    dag_node: str
-    status: str
-    payload_jsonb: dict
-    created_at: str
+    supplier_name: str
+    total_score: float
+    component_scores: Dict[str, float]
 
-class ToolCall(BaseModel):
-    id: str
-    run_id: str
-    tool_name: str
-    input_jsonb: dict
-    output_jsonb: dict
-    latency_ms: Optional[int]
+@dataclass
+class Scorecard:
+    session_id: str
+    scores: List[Score]
+    formula: ScoringFormula
 
-class ConversationTurn(BaseModel):
-    id: str
-    conv_id: str
-    role: str  # enum: AGENT/SUPPLIER/HUMAN_OVERRIDE
-    content: str
-    sent_at: str
-    meta: Optional[dict] = None
-
-class EvaluationTurn(BaseModel):
-    id: str
-    turn_id: str
-    judge_version: str
-    grounding: int
-    relevance: int
-    tone: int
-    notes: Optional[str]
-    pass_: bool
-
-class ConversationSettings(BaseModel):
-    conv_id: str
-    send_policy: str  # enum: AUTO / WAIT
-    auto_threshold: int = 24
+def to_json(obj) -> Dict[str, Any]:
+    if hasattr(obj, "__dict__") or isinstance(obj, (list, dict)):
+        def convert(o):
+            if hasattr(o, "__dict__"):
+                return {k: convert(v) for k, v in o.__dict__.items()}
+            if isinstance(o, list):
+                return [convert(i) for i in o]
+            if isinstance(o, dict):
+                return {k: convert(v) for k, v in o.items()}
+            return o
+        return convert(obj)
+    return asdict(obj)

@@ -24,3 +24,12 @@ frontend/.env.*
 backend/.env
 backend/.env.*
 backend/venv/
+vendor-negotiation-agt/
+
+# Ignore v1 folder
+v1/
+
+
+# Ignore spec docs
+scoping/
+spec_doc.md

@@ -1,7 +1,0 @@
-fastapi
-uvicorn
-supabase
-langchain
-openai
-mem0ai
-python-multipart
