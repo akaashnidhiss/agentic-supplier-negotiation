@@ -30,20 +30,20 @@ The accompanying Streamlit app demonstrates the flow visually:
 
 ```mermaid
 flowchart TD
-    A[Upload Specs (Zip / Demo)] --> B[Parse & Ingest]
-    B --> C[Generate Quote Schemas]
-    C --> D[Categorize Items]
-    D --> E[Find Suppliers from DB]
-    E --> F[Draft Initial RFP Emails]
-    F --> G[Send Emails (Demo Outbox)]
-    G --> H[Simulated Supplier Replies]
-    H --> I[Enrich Quote Schemas with Bids]
-    I --> J[Weighted Scoring & Ranking]
-    J --> K[Final Scorecard per SKU]
+    A["Upload Specs (Zip / Demo)"] --> B["Parse & Ingest"]
+    B --> C["Generate Quote Schemas"]
+    C --> D["Categorize Items"]
+    D --> E["Find Suppliers from DB"]
+    E --> F["Draft Initial RFP Emails"]
+    F --> G["Send Emails (Demo Outbox)"]
+    G --> H["Simulated Supplier Replies"]
+    H --> I["Enrich Quote Schemas with Bids"]
+    I --> J["Weighted Scoring & Ranking"]
+    J --> K["Final Scorecard per SKU"]
 
-    subgraph Logging & UI
-      L[Event Log JSONL]
-      M[Streamlit App]
+    subgraph "Logging & UI"
+      L["Event Log JSONL"]
+      M["Streamlit App"]
     end
 
     A -.-> L
